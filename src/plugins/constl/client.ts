@@ -23,9 +23,12 @@ export type WorkshopData = {
 export default class Client {
   constellation: proxy.proxy.ProxyClientConstellation;
 
+  myAccountId?: string;
+
   constructor() {
     const accountId = localStorage.getItem('Account id') || undefined;
     this.constellation = proxy.ipa.default({ compte: accountId });
+    this.constellation.obtIdCompte().then((id) => { this.myAccountId = id; });
   }
 
   async followTableId({ f }: {
@@ -133,14 +136,24 @@ export default class Client {
     };
   }
 
-  async followAllData(
+  async followAllData({ f }: {
     f: utils.schémaFonctionSuivi<
       réseau.élémentDeMembre<WorkshopData>[]
     >,
-  ): Promise<utils.schémaFonctionOublier> {
+  }): Promise<utils.schémaFonctionOublier> {
+    console.log({ workshopKeyword, workshopTableUniqueId, f });
     const { fOublier } = await this.constellation.réseau!.suivreÉlémentsDeTableauxUniques({
       motClefUnique: workshopKeyword,
       idUniqueTableau: workshopTableUniqueId,
+      f,
+    });
+    return fOublier;
+  }
+
+  async followOnline({ f }: {
+    f: utils.schémaFonctionSuivi<réseau.infoMembreRéseau[]>
+  }): Promise<utils.schémaFonctionOublier> {
+    const { fOublier } = await this.constellation.réseau!.suivreComptesRéseauEtEnLigne({
       f,
     });
     return fOublier;
