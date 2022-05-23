@@ -2,7 +2,7 @@ const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 const WorkerPlugin = require('worker-plugin');
 
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/egu2022' : '/',
   transpileDependencies: ['vuetify'],
   productionSourceMap: false,
   configureWebpack: {
