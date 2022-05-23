@@ -1,19 +1,23 @@
 import {
   proxy, réseau, utils, valid,
 } from '@constl/ipa';
+import { read as readXLSX } from 'xlsx';
+import ImportateurFeuilleCalcul from '@/xlsx';
 
-import { DBSchema } from './schema';
+import DBSchema from './schema';
 
 import {
   dateColId,
   streamFlowColId,
+  siteColId,
   workshopTableUniqueId,
   workshopKeyword,
 } from './config';
 
 export type WorkshopData = {
   [dateColId]: number;
-  [streamFlowColId]: string;
+  [streamFlowColId]: number;
+  [siteColId]: number;
 };
 
 export default class Client {
@@ -27,7 +31,7 @@ export default class Client {
   async followTableId({ f }: {
     f: utils.schémaFonctionSuivi<string | undefined>
   }): Promise<utils.schémaFonctionOublier> {
-    return await this.constellation.bds!.suivreTableauUniqueDeBdUnique({
+    return this.constellation.bds!.suivreTableauUniqueDeBdUnique({
       schémaBd: DBSchema,
       motClefUnique: workshopKeyword,
       idUniqueTableau: workshopTableUniqueId,
@@ -35,21 +39,55 @@ export default class Client {
     });
   }
 
-  async addData({ tableId, date, streamflow }: {
+  async addData({
+    tableId, date, streamflow, site,
+  }: {
     tableId: string,
     date: Date,
     streamflow: number,
+    site: string,
   }): Promise<void> {
     const newData = {
       [dateColId]: date.getTime(),
       [streamFlowColId]: streamflow,
+      [siteColId]: site,
     };
     await this.constellation.tableaux!.ajouterÉlément({ idTableau: tableId, vals: newData });
   }
 
+  async readDataFromFile({ file }: {file: File}) {
+    const tableId = await utils.uneFois(
+      async (f: utils.schémaFonctionSuivi<string | undefined>) => this.followTableId({ f }),
+    );
+    if (!tableId) throw new Error('No table id');
+
+    const fileData = await file.arrayBuffer();
+    const doc = readXLSX(fileData, {
+      type: 'buffer',
+      cellDates: true,
+    });
+    const importer = new ImportateurFeuilleCalcul(doc);
+
+    const data = importer.obtDonnées('Sheet1', {
+      [dateColId]: 'dia',
+      [siteColId]: 'sitio',
+      [streamFlowColId]: 'flujo',
+    }) as WorkshopData[];
+    data.forEach(async (d) => {
+      const year = Number(String(d[dateColId]).slice(-4));
+      const month = Number(String(d[dateColId]).slice(0, -4));
+      const date = new Date(year, month, 1);
+      const site = String(d[siteColId]);
+
+      await this.addData({
+        tableId, date, streamflow: d[streamFlowColId], site,
+      });
+    });
+  }
+
   async deleteData({ lineId }: {lineId: string}): Promise<void> {
     const tableId = await utils.uneFois(
-      async (f: utils.schémaFonctionSuivi<string | undefined>) => await this.followTableId({ f }),
+      async (f: utils.schémaFonctionSuivi<string | undefined>) => this.followTableId({ f }),
     );
     if (tableId) {
       await this.constellation.tableaux!.effacerÉlément(
@@ -60,7 +98,7 @@ export default class Client {
 
   async deleteAllData(): Promise<void> {
     const entryIds = await utils.uneFois(
-      async (f: utils.schémaFonctionSuivi<string[]>) => await this.followMyData({
+      async (f: utils.schémaFonctionSuivi<string[]>) => this.followMyData({
         f: ((data: valid.élémentDonnées<WorkshopData>[]) => f(data.map((d) => d.empreinte))),
       }),
     );

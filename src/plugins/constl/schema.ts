@@ -5,11 +5,13 @@ import {
   dateColId,
   streamFlowVarId,
   streamFlowColId,
+  siteVarId,
+  siteColId,
   workshopKeyword,
   workshopTableUniqueId,
 } from './config';
 
-export const DBSchema: bds.schémaSpécificationBd = {
+export default {
   motsClefs: [workshopKeyword],
   licence: 'ODbl-1_0',
   tableaux: [
@@ -21,10 +23,14 @@ export const DBSchema: bds.schémaSpécificationBd = {
           idColonne: dateColId,
         },
         {
+          idVariable: siteVarId,
+          idColonne: siteColId,
+        },
+        {
           idVariable: streamFlowVarId,
           idColonne: streamFlowColId,
         },
       ],
     },
   ],
-};
+} as bds.schémaSpécificationBd;
