@@ -4146,18 +4146,18 @@ chalk@2.4.2, chalk@^2.0.0, chalk@^2.1.0, chalk@^2.3.0:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-chalk@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/chalk/-/chalk-3.0.0.tgz#3f73c2bf526591f574cc492c51e2456349f844e4"
-  integrity sha512-4D3B6Wf41KOYRFdszmDqMCGq5VV/uMAB273JILmO+3jAlh8X4qDtdtgCR3fxtbLEMzSx22QdhnDcJvu2u1fVwg==
+chalk@4, chalk@^4.0.0, chalk@^4.0.2, chalk@^4.1.0, chalk@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
+  integrity sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
   dependencies:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-chalk@^4.0.0, chalk@^4.0.2, chalk@^4.1.0, chalk@^4.1.2:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
-  integrity sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
+chalk@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-3.0.0.tgz#3f73c2bf526591f574cc492c51e2456349f844e4"
+  integrity sha512-4D3B6Wf41KOYRFdszmDqMCGq5VV/uMAB273JILmO+3jAlh8X4qDtdtgCR3fxtbLEMzSx22QdhnDcJvu2u1fVwg==
   dependencies:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
@@ -5919,6 +5919,21 @@ evp_bytestokey@^1.0.0, evp_bytestokey@^1.0.3:
     md5.js "^1.3.4"
     safe-buffer "^5.1.1"
 
+execa@5, execa@^5.0.0:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/execa/-/execa-5.1.1.tgz#f80ad9cbf4298f7bd1d4c9555c21e93741c411dd"
+  integrity sha512-8uSpZZocAZRBAPIEINJj3Lo9HyGitllczc27Eh5YYojjMFMn8yHMDMaUHE2Jqfq05D/wucwI4JGURyXt1vchyg==
+  dependencies:
+    cross-spawn "^7.0.3"
+    get-stream "^6.0.0"
+    human-signals "^2.1.0"
+    is-stream "^2.0.0"
+    merge-stream "^2.0.0"
+    npm-run-path "^4.0.1"
+    onetime "^5.1.2"
+    signal-exit "^3.0.3"
+    strip-final-newline "^2.0.0"
+
 execa@^0.8.0:
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/execa/-/execa-0.8.0.tgz#d8d76bbc1b55217ed190fd6dd49d3c774ecfc8da"
@@ -5944,21 +5959,6 @@ execa@^1.0.0:
     p-finally "^1.0.0"
     signal-exit "^3.0.0"
     strip-eof "^1.0.0"
-
-execa@^5.0.0:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/execa/-/execa-5.1.1.tgz#f80ad9cbf4298f7bd1d4c9555c21e93741c411dd"
-  integrity sha512-8uSpZZocAZRBAPIEINJj3Lo9HyGitllczc27Eh5YYojjMFMn8yHMDMaUHE2Jqfq05D/wucwI4JGURyXt1vchyg==
-  dependencies:
-    cross-spawn "^7.0.3"
-    get-stream "^6.0.0"
-    human-signals "^2.1.0"
-    is-stream "^2.0.0"
-    merge-stream "^2.0.0"
-    npm-run-path "^4.0.1"
-    onetime "^5.1.2"
-    signal-exit "^3.0.3"
-    strip-final-newline "^2.0.0"
 
 express@^4.17.3:
   version "4.18.1"
@@ -9948,6 +9948,13 @@ node-addon-api@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-2.0.2.tgz#432cfa82962ce494b132e9d72a15b29f71ff5d32"
   integrity sha512-Ntyt4AIXyaLIuMHF6IOoTakB3K+RWxwtsHNRxllEoA6vPwP9o4866g6YWDLUdnucilZhmkxiHwHr11gAENw+QA==
+
+node-emoji@^1.11.0:
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/node-emoji/-/node-emoji-1.11.0.tgz#69a0150e6946e2f115e9d7ea4df7971e2628301c"
+  integrity sha512-wo2DpQkQp7Sjm2A0cq+sN7EHKO6Sl0ctXeBdFZrL9T9+UywORbufTcTZxom8YqpLQt/FqNMUkOpkZrJVYSKD3A==
+  dependencies:
+    lodash "^4.17.21"
 
 node-fetch@^2.6.1, node-fetch@^2.6.7, "node-fetch@https://registry.npmjs.org/@achingbrain/node-fetch/-/node-fetch-2.6.7.tgz":
   version "2.6.7"
