@@ -1,0 +1,1 @@
+(self["webpackChunkegu2022"]=self["webpackChunkegu2022"]||[]).push([[163],{2163:function(e,n,t){var l="/",o=t(48102),a=t(26470),i=a.join(l,"path.txt");if(!o.existsSync(i))throw new Error("Electron failed to install correctly, please delete node_modules/electron and try installing again");e.exports=a.join(l,o.readFileSync(i,"utf-8"))},48102:function(){}}]);

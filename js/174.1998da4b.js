@@ -1,0 +1,1 @@
+"use strict";(self["webpackChunkegu2022"]=self["webpackChunkegu2022"]||[]).push([[174],{33174:function(e,u,s){s.r(u);var t=s(44389),c=s.n(t),n=s(29846),r=s(27344);u["default"]={modules:{transport:[c(),n.WebSockets,r.WebRTCDirect]}}}}]);
